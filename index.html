@@ -225,14 +225,14 @@
           title: '畜牧管理后台',
           audience: '面向畜牧局 · 乡镇畜牧管理',
           features: ['牲畜档案建立与全周期管理', '草场分区与载畜量核算', '告警处理与待办任务', '用户、角色与数据权限'],
-          note: '已实现，演示入口暂未公开'
+          note: '已实现，仅内网可访问'
         },
         {
           kind: '移动 App', icon: 'phone', live: false,
           title: '移动端应用',
           audience: '面向牧户 · 一线放牧人员',
           features: ['uni-app 跨端：安卓 App / H5 / 微信小程序', '放牧管理与牲畜档案查询', '待办、告警与在线咨询', '移动端现场数据上报'],
-          note: '已实现，演示入口暂未公开'
+          note: '已实现，仅内网可访问'
         }
       ]
     }
@@ -323,7 +323,7 @@
               <button class="tab" :class="{on: filter==='vox'}" @click="filter='vox'">VOX IoT</button>
               <button class="tab" :class="{on: filter==='pasture'}" @click="filter='pasture'">数牧空间</button>
             </div>
-            <div class="count">当前展示 {{ visible.length }} 个项目 · {{ count }} 个产品端 · {{ liveCount }} 个可访问</div>
+            <div class="count">当前展示 {{ visible.length }} 个项目 · {{ count }} 个产品端 · {{ liveCount }} 个公网可访问</div>
           </div>
         </div>
 
@@ -356,7 +356,7 @@
                   <span class="kind" :style="{background:p.soft, color:p.accent}">
                     <i class="bi" :class="icons[e.icon]" aria-hidden="true"></i>{{ e.kind }}
                   </span>
-                  <span class="status"><i class="dot"></i>{{ e.live ? '可访问' : '未公开' }}</span>
+                  <span class="status"><i class="dot"></i>{{ e.live ? '公网可访问' : '仅内网可访问' }}</span>
                 </div>
                 <h3>{{ e.title }}</h3>
                 <p class="audience">{{ e.audience }}</p>
@@ -367,7 +367,7 @@
                   打开访问
                   <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </span>
-                <span class="cta" v-else>暂无公开访问链接</span>
+                <span class="cta" v-else>仅内网可访问</span>
                 <div class="url">{{ e.urlText || e.note }}</div>
               </article>
             </div>
@@ -389,7 +389,7 @@
                     <td style="font-weight:600">{{ r.end.title }}</td>
                     <td>{{ r.end.audience.replace('面向','') }}</td>
                     <td class="scene">{{ r.end.features[0] }}</td>
-                    <td><span class="pill" :class="r.end.live ? 'on' : 'off'">{{ r.end.live ? '可访问' : '暂未公开' }}</span></td>
+                    <td><span class="pill" :class="r.end.live ? 'on' : 'off'">{{ r.end.live ? '公网可访问' : '仅内网可访问' }}</span></td>
                     <td>
                       <a v-if="r.end.live" :href="r.end.url" target="_blank" rel="noopener">打开</a>
                       <span v-else style="color:var(--ink-3)">—</span>
