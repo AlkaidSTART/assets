@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>农业数字化综合平台 · 产品矩阵</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
+<title>智慧农业与畜牧物联网综合管控平台 · 产品矩阵</title>
 <style>
   :root{
     --bg:#ffffff;
@@ -59,7 +60,10 @@
   .project{padding:52px 0 26px;border-bottom:1px solid var(--line);}
   .project:last-of-type{border-bottom:0;}
   .p-head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;}
-  .p-mark{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:700;font-size:17px;color:#fff;flex:none;letter-spacing:-.02em;}
+  .p-mark{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;flex:none;}
+  .p-mark .bi{font-size:22px;color:#fff;line-height:1;}
+  .p-mark.has-image{background:#fff;border:1px solid var(--line);overflow:hidden;}
+  .p-mark img{width:100%;height:100%;object-fit:contain;display:block;}
   .p-title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
   .p-title h2{font-size:22px;margin:0;letter-spacing:-.01em;}
   .p-title code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--ink-3);background:var(--line-2);padding:2px 8px;border-radius:6px;}
@@ -86,8 +90,9 @@
   .live .cta{background:var(--accent);color:#fff;}
   .live .cta:hover{filter:brightness(1.08);}
   .hold .cta{background:var(--hold-soft);color:var(--hold);border-color:var(--line);cursor:default;}
-  .cta svg,.cta iconify-icon{width:14px;height:14px;}
-  iconify-icon{display:inline-block;vertical-align:-2px;}
+  .bi{display:inline-block;font-size:14px;line-height:1;vertical-align:-2px;}
+  .cta .bi{font-size:14px;}
+  .kind .bi{font-size:12.5px;margin-right:5px;vertical-align:-1.5px;}
   .url{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--ink-3);margin-top:10px;word-break:break-all;}
 
   /* ---------- table ---------- */
@@ -131,7 +136,7 @@
   <!-- 若 Vue CDN 加载失败，这段纯静态内容会保留，保证仍然可读可用 -->
   <div id="boot">
     <div class="plain">
-      <h1>农业数字化综合平台 · 产品矩阵</h1>
+      <h1>智慧农业与畜牧物联网综合管控平台 · 产品矩阵</h1>
       <p class="lede">2 个项目 · 6 个产品端：VOX IoT（农业物联网）与 数牧空间（畜牧数字化）。</p>
       <div class="table-scroll" style="margin-top:22px">
         <table>
@@ -151,7 +156,6 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/iconify-icon@2/dist/iconify-icon.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
 <script>
 (function () {
@@ -164,7 +168,7 @@
       code: 'vox-platform',
       accent: '#0d9488',
       soft: '#f0fdfa',
-      mark: 'V',
+      mark: 'bi-router',
       positioning: '轻量农业物联网平台，统一设备接入与传感数据全链路管理，支持多协议解析与三语语音控制。',
       tags: ['Go · Gin', 'Vue 3 · Element Plus', 'MQTT / TCP / HTTP', 'uni-app', '多语言 中文·彝语·藏语'],
       ends: [
@@ -203,7 +207,7 @@
       code: 'TianSun-cup',
       accent: '#4f46e5',
       soft: '#f5f5ff',
-      mark: '牧',
+      markImage: 'ats/shumu-space-icon.png',
       positioning: '面向牧场与畜牧局的牲畜档案与放牧监测平台，覆盖三维监测大屏、业务管理后台与移动端。',
       tags: ['Vue 3 · Vite', 'uni-app（H5 / 安卓 / 微信小程序）', 'Three.js 三维可视化', 'Express + SQLite'],
       ends: [
@@ -236,15 +240,14 @@
 
   var ORDER = ['vox', 'pasture'];
 
-  // 图标统一使用 Iconify 专业图标库（Lucide 图标集），不手写 SVG
+  // 图标统一使用 Bootstrap Icons 专业图标库（官方字体图标），不使用 SVG
   var ICONS = {
-    web: 'lucide:layout-dashboard',
-    screen: 'lucide:presentation',
-    phone: 'lucide:smartphone'
+    web: 'bi-speedometer2',
+    screen: 'bi-display',
+    phone: 'bi-phone'
   };
 
   var app = Vue.createApp({
-    compilerOptions: { isCustomElement: function (tag) { return tag.indexOf('iconify-') === 0; } },
     data: function () {
       return { filter: 'all', products: PRODUCTS, order: ORDER, icons: ICONS };
     },
@@ -302,7 +305,7 @@
         <header>
           <div class="wrap">
             <div class="eyebrow">Product Matrix</div>
-            <h1>农业数字化综合平台 · 产品矩阵</h1>
+            <h1>智慧农业与畜牧物联网综合管控平台 · 产品矩阵</h1>
             <p class="lede">两个自研项目、六个产品端，覆盖牧场管理与农业物联网；从 Web 管理后台、移动 App 到三维数据大屏，形成完整的“端—云—屏”产品体系。</p>
             <div class="stats">
               <div class="stat"><b>{{ order.length }}<em>个</em></b><span>自研项目</span></div>
@@ -327,7 +330,10 @@
         <main class="wrap">
           <section class="project" v-for="p in visible" :key="p.key" :style="{'--accent': p.accent, '--soft': p.soft}">
             <div class="p-head">
-              <div class="p-mark" :style="{background:p.accent}">{{ p.mark }}</div>
+              <div class="p-mark" :class="{'has-image': p.markImage}" :style="p.markImage ? {} : {background:p.accent}">
+                <img v-if="p.markImage" :src="p.markImage" :alt="p.name + ' 图标'" />
+                <i v-else class="bi" :class="p.mark" aria-hidden="true"></i>
+              </div>
               <div style="flex:1;min-width:260px">
                 <div class="p-title">
                   <h2>{{ p.name }}</h2>
@@ -348,7 +354,7 @@
                        @keydown="onCardKey($event, e)">
                 <div class="card-top">
                   <span class="kind" :style="{background:p.soft, color:p.accent}">
-                    <iconify-icon :icon="icons[e.icon]" width="12" height="12" style="margin-right:4px"></iconify-icon>{{ e.kind }}
+                    <i class="bi" :class="icons[e.icon]" aria-hidden="true"></i>{{ e.kind }}
                   </span>
                   <span class="status"><i class="dot"></i>{{ e.live ? '可访问' : '未公开' }}</span>
                 </div>
@@ -359,7 +365,7 @@
                 </ul>
                 <span class="cta" v-if="e.live">
                   打开访问
-                  <iconify-icon icon="lucide:arrow-up-right" width="14" height="14"></iconify-icon>
+                  <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
                 </span>
                 <span class="cta" v-else>暂无公开访问链接</span>
                 <div class="url">{{ e.urlText || e.note }}</div>
@@ -397,7 +403,7 @@
 
         <footer>
           <div class="wrap">
-            <span>农业数字化综合平台 · 产品矩阵总览</span>
+            <span>智慧农业与畜牧物联网综合管控平台 · 产品矩阵总览</span>
             <span>共 2 个项目 / 6 个产品端 · 链接以线上实际部署为准</span>
           </div>
         </footer>
