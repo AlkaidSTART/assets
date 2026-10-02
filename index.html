@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>农业数字化综合平台 · 产品矩阵</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#0f172a;
+    --ink-2:#475569;
+    --ink-3:#94a3b8;
+    --line:#e8ecf1;
+    --line-2:#f1f5f9;
+    --vox:#0d9488;
+    --vox-soft:#f0fdfa;
+    --pasture:#4f46e5;
+    --pasture-soft:#f5f5ff;
+    --ok:#059669;
+    --ok-soft:#ecfdf5;
+    --hold:#94a3b8;
+    --hold-soft:#f8fafc;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(15,23,42,.04), 0 8px 24px -12px rgba(15,23,42,.12);
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+  [v-cloak]{display:none;}
+
+  /* ---------- header ---------- */
+  header{padding:64px 0 34px;border-bottom:1px solid var(--line);}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.12em;color:var(--ink-3);text-transform:uppercase;font-weight:600;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--ink);border-radius:2px;}
+  h1{font-size:clamp(26px,3.4vw,40px);line-height:1.25;margin:16px 0 12px;letter-spacing:-.02em;font-weight:700;}
+  .lede{max-width:660px;color:var(--ink-2);font-size:16px;margin:0;}
+  .stats{display:flex;flex-wrap:wrap;gap:38px;margin-top:34px;}
+  .stat b{display:block;font-size:30px;line-height:1.1;letter-spacing:-.02em;font-weight:700;}
+  .stat span{font-size:13px;color:var(--ink-3);}
+  .stat b em{font-style:normal;font-size:15px;color:var(--ink-3);font-weight:600;margin-left:2px;}
+
+  /* ---------- toolbar ---------- */
+  .toolbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:saturate(1.6) blur(10px);border-bottom:1px solid var(--line);}
+  .toolbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;flex-wrap:wrap;}
+  .tabs{display:flex;gap:6px;background:var(--line-2);padding:4px;border-radius:999px;}
+  .tab{border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:14px;padding:7px 16px;border-radius:999px;cursor:pointer;transition:.16s;white-space:nowrap;}
+  .tab:hover{color:var(--ink);}
+  .tab.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.08);}
+  .count{font-size:13px;color:var(--ink-3);}
+
+  /* ---------- project ---------- */
+  main{padding:12px 0 20px;}
+  .project{padding:52px 0 26px;border-bottom:1px solid var(--line);}
+  .project:last-of-type{border-bottom:0;}
+  .p-head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  .p-mark{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:700;font-size:17px;color:#fff;flex:none;letter-spacing:-.02em;}
+  .p-title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .p-title h2{font-size:22px;margin:0;letter-spacing:-.01em;}
+  .p-title code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--ink-3);background:var(--line-2);padding:2px 8px;border-radius:6px;}
+  .p-desc{color:var(--ink-2);margin:6px 0 0;max-width:720px;}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+  .tag{font-size:12.5px;color:var(--ink-2);background:var(--line-2);border-radius:7px;padding:3px 10px;}
+
+  /* ---------- cards ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px;}
+  .card{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:22px;box-shadow:var(--shadow);transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;}
+  .card.live:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 2px 4px rgba(15,23,42,.05),0 18px 34px -18px rgba(15,23,42,.22);}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .kind{font-size:12px;font-weight:600;letter-spacing:.02em;padding:3px 9px;border-radius:999px;}
+  .status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;}
+  .dot{width:6px;height:6px;border-radius:50%;}
+  .live .status{color:var(--ok);} .live .dot{background:var(--ok);box-shadow:0 0 0 3px var(--ok-soft);}
+  .hold .status{color:var(--hold);} .hold .dot{background:var(--hold);box-shadow:0 0 0 3px var(--hold-soft);}
+  .card h3{margin:16px 0 2px;font-size:17px;letter-spacing:-.01em;}
+  .audience{font-size:13px;color:var(--ink-3);margin:0 0 14px;}
+  ul.feat{list-style:none;margin:0 0 20px;padding:0;flex:1;}
+  ul.feat li{position:relative;padding-left:15px;font-size:13.5px;color:var(--ink-2);margin-bottom:6px;}
+  ul.feat li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.55;}
+  .cta{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13.5px;font-weight:600;border-radius:10px;padding:10px 14px;transition:.16s;border:1px solid transparent;cursor:pointer;font-family:inherit;}
+  .live .cta{background:var(--accent);color:#fff;}
+  .live .cta:hover{filter:brightness(1.08);}
+  .hold .cta{background:var(--hold-soft);color:var(--hold);border-color:var(--line);cursor:default;}
+  .cta svg,.cta iconify-icon{width:14px;height:14px;}
+  iconify-icon{display:inline-block;vertical-align:-2px;}
+  .url{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--ink-3);margin-top:10px;word-break:break-all;}
+
+  /* ---------- table ---------- */
+  section.matrix{padding:56px 0 24px;}
+  section.matrix h2{font-size:20px;margin:0 0 6px;letter-spacing:-.01em;}
+  section.matrix p.sub{color:var(--ink-3);font-size:13.5px;margin:0 0 22px;}
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);}
+  table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px;}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line-2);white-space:nowrap;}
+  th{background:var(--line-2);font-weight:600;color:var(--ink-2);font-size:12.5px;letter-spacing:.03em;}
+  tr:last-child td{border-bottom:0;}
+  td.scene{white-space:normal;color:var(--ink-2);min-width:200px;}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;}
+  .pill.on{color:var(--ok);background:var(--ok-soft);}
+  .pill.off{color:var(--hold);background:var(--hold-soft);}
+  td a{font-weight:600;border-bottom:1px solid currentColor;padding-bottom:1px;}
+
+  footer{padding:36px 0 60px;color:var(--ink-3);font-size:12.5px;border-top:1px solid var(--line);}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+
+  @media(max-width:900px){ .grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:640px){
+    .wrap{padding:0 18px;}
+    header{padding:44px 0 26px;}
+    .stats{gap:26px;}
+    .grid{grid-template-columns:1fr;}
+    .project{padding:38px 0 18px;}
+    .toolbar .wrap{min-height:auto;padding-top:10px;padding-bottom:10px;}
+  }
+  /* ---- offline fallback (only visible if CDN fails) ---- */
+  #boot .plain{max-width:1160px;margin:0 auto;padding:48px 28px;}
+  #boot .plain h1{font-size:28px;}
+  #boot .plain table{min-width:0;}
+</style>
+</head>
+<body>
+
+<!-- ======================= APP ROOT ======================= -->
+<div id="app">
+
+  <!-- 若 Vue CDN 加载失败，这段纯静态内容会保留，保证仍然可读可用 -->
+  <div id="boot">
+    <div class="plain">
+      <h1>农业数字化综合平台 · 产品矩阵</h1>
+      <p class="lede">2 个项目 · 6 个产品端：VOX IoT（农业物联网）与 数牧空间（畜牧数字化）。</p>
+      <div class="table-scroll" style="margin-top:22px">
+        <table>
+          <thead><tr><th>项目</th><th>产品端</th><th>访问链接</th></tr></thead>
+          <tbody>
+            <tr><td>VOX IoT</td><td>管理后台</td><td><a href="https://vox.hub.feashow.cn/#/dashboard" target="_blank" rel="noopener">vox.hub.feashow.cn/#/dashboard</a></td></tr>
+            <tr><td>VOX IoT</td><td>智慧大屏</td><td><a href="https://vox.hub.feashow.cn/#/bigscreen" target="_blank" rel="noopener">vox.hub.feashow.cn/#/bigscreen</a></td></tr>
+            <tr><td>VOX IoT</td><td>移动 App / H5</td><td><a href="https://vox.hub.feashow.cn/#/download" target="_blank" rel="noopener">vox.hub.feashow.cn/#/download</a></td></tr>
+            <tr><td>数牧空间</td><td>Web 三维大屏</td><td><a href="https://tian-sun-cup.vercel.app/" target="_blank" rel="noopener">tian-sun-cup.vercel.app</a></td></tr>
+            <tr><td>数牧空间</td><td>管理后台</td><td>暂无公开链接</td></tr>
+            <tr><td>数牧空间</td><td>移动 App</td><td>暂无公开链接</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@2/dist/iconify-icon.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+<script>
+(function () {
+  if (!window.Vue) return; // CDN 未就绪 → 保留静态内容
+
+  var PRODUCTS = {
+    vox: {
+      key: 'vox',
+      name: 'VOX IoT',
+      code: 'vox-platform',
+      accent: '#0d9488',
+      soft: '#f0fdfa',
+      mark: 'V',
+      positioning: '轻量农业物联网平台，统一设备接入与传感数据全链路管理，支持多协议解析与三语语音控制。',
+      tags: ['Go · Gin', 'Vue 3 · Element Plus', 'MQTT / TCP / HTTP', 'uni-app', '多语言 中文·彝语·藏语'],
+      ends: [
+        {
+          kind: 'Web 管理后台', icon: 'web', live: true,
+          title: '管理后台',
+          audience: '面向平台管理员 · 运维人员',
+          features: ['首页概览与设备在线状态总览', '设备管理：接入、分组与远程控制', '网络服务与协议解析脚本配置', '系统设置、账号与个人中心'],
+          url: 'https://vox.hub.feashow.cn/#/dashboard',
+          urlText: 'vox.hub.feashow.cn/#/dashboard',
+          note: '需平台账号登录'
+        },
+        {
+          kind: '数据大屏', icon: 'screen', live: true,
+          title: '智慧大屏',
+          audience: '面向指挥中心 · 展厅演示',
+          features: ['实时遥测数据可视化', '设备在线率与阀门状态监控', '气象八要素与土壤墒情看板', '开/关等关键操作实时刷新'],
+          url: 'https://vox.hub.feashow.cn/#/bigscreen',
+          urlText: 'vox.hub.feashow.cn/#/bigscreen',
+          note: '需平台账号登录'
+        },
+        {
+          kind: '移动 App / H5', icon: 'phone', live: true,
+          title: '移动控制端',
+          audience: '面向一线农业操作人员',
+          features: ['三语（中文/彝语/藏语）语音控制阀门开/关', '气象八要素与土壤墒情实时查看', '设备与阀门状态实时刷新', '常用操作历史，一键快捷下发'],
+          url: 'https://vox.hub.feashow.cn/#/download',
+          urlText: 'vox.hub.feashow.cn/#/download',
+          note: 'v1.0.0 · 安卓安装包下载'
+        }
+      ]
+    },
+    pasture: {
+      key: 'pasture',
+      name: '数牧空间',
+      code: 'TianSun-cup',
+      accent: '#4f46e5',
+      soft: '#f5f5ff',
+      mark: '牧',
+      positioning: '面向牧场与畜牧局的牲畜档案与放牧监测平台，覆盖三维监测大屏、业务管理后台与移动端。',
+      tags: ['Vue 3 · Vite', 'uni-app（H5 / 安卓 / 微信小程序）', 'Three.js 三维可视化', 'Express + SQLite'],
+      ends: [
+        {
+          kind: 'Web 三维大屏', icon: 'screen', live: true,
+          title: '三维放牧监测大屏',
+          audience: '面向监管指挥 · 成果展示',
+          features: ['阿坝三维放牧场景实时监测', '草场分区与载畜量可视化', '牲畜分布、定位与告警呈现', 'Three.js 三维交互大屏'],
+          url: 'https://tian-sun-cup.vercel.app/',
+          urlText: 'tian-sun-cup.vercel.app',
+          note: '公网可直接访问'
+        },
+        {
+          kind: 'Web 管理后台', icon: 'web', live: false,
+          title: '畜牧管理后台',
+          audience: '面向畜牧局 · 乡镇畜牧管理',
+          features: ['牲畜档案建立与全周期管理', '草场分区与载畜量核算', '告警处理与待办任务', '用户、角色与数据权限'],
+          note: '已实现，演示入口暂未公开'
+        },
+        {
+          kind: '移动 App', icon: 'phone', live: false,
+          title: '移动端应用',
+          audience: '面向牧户 · 一线放牧人员',
+          features: ['uni-app 跨端：安卓 App / H5 / 微信小程序', '放牧管理与牲畜档案查询', '待办、告警与在线咨询', '移动端现场数据上报'],
+          note: '已实现，演示入口暂未公开'
+        }
+      ]
+    }
+  };
+
+  var ORDER = ['vox', 'pasture'];
+
+  // 图标统一使用 Iconify 专业图标库（Lucide 图标集），不手写 SVG
+  var ICONS = {
+    web: 'lucide:layout-dashboard',
+    screen: 'lucide:presentation',
+    phone: 'lucide:smartphone'
+  };
+
+  var app = Vue.createApp({
+    compilerOptions: { isCustomElement: function (tag) { return tag.indexOf('iconify-') === 0; } },
+    data: function () {
+      return { filter: 'all', products: PRODUCTS, order: ORDER, icons: ICONS };
+    },
+    computed: {
+      visible: function () {
+        var self = this;
+        return this.order
+          .filter(function (k) { return self.filter === 'all' || self.filter === k; })
+          .map(function (k) { return self.products[k]; });
+      },
+      count: function () {
+        var n = 0;
+        this.visible.forEach(function (p) { n += p.ends.length; });
+        return n;
+      },
+      liveCount: function () {
+        var n = 0;
+        this.visible.forEach(function (p) {
+          p.ends.forEach(function (e) { if (e.live) n += 1; });
+        });
+        return n;
+      },
+      totalEnds: function () {
+        var n = 0;
+        this.order.forEach(function (k) { n += PRODUCTS[k].ends.length; });
+        return n;
+      },
+      totalLive: function () {
+        var n = 0;
+        this.order.forEach(function (k) {
+          PRODUCTS[k].ends.forEach(function (e) { if (e.live) n += 1; });
+        });
+        return n;
+      },
+      rows: function () {
+        var out = [];
+        this.order.forEach(function (k) {
+          PRODUCTS[k].ends.forEach(function (e) {
+            out.push({ project: PRODUCTS[k].name, accent: PRODUCTS[k].accent, end: e });
+          });
+        });
+        return out;
+      }
+    },
+    methods: {
+      openEnd: function (e) {
+        if (e.live && e.url) window.open(e.url, '_blank', 'noopener');
+      },
+      onCardKey: function (ev, e) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); this.openEnd(e); }
+      }
+    },
+    template: `
+      <div v-cloak>
+        <header>
+          <div class="wrap">
+            <div class="eyebrow">Product Matrix</div>
+            <h1>农业数字化综合平台 · 产品矩阵</h1>
+            <p class="lede">两个自研项目、六个产品端，覆盖牧场管理与农业物联网；从 Web 管理后台、移动 App 到三维数据大屏，形成完整的“端—云—屏”产品体系。</p>
+            <div class="stats">
+              <div class="stat"><b>{{ order.length }}<em>个</em></b><span>自研项目</span></div>
+              <div class="stat"><b>{{ totalEnds }}<em>个</em></b><span>核心产品端</span></div>
+              <div class="stat"><b>{{ totalLive }}<em>个</em></b><span>线上可访问入口</span></div>
+              <div class="stat"><b>Web / App / 大屏</b><span>全终端覆盖</span></div>
+            </div>
+          </div>
+        </header>
+
+        <div class="toolbar">
+          <div class="wrap">
+            <div class="tabs" role="tablist">
+              <button class="tab" :class="{on: filter==='all'}" @click="filter='all'">全部项目</button>
+              <button class="tab" :class="{on: filter==='vox'}" @click="filter='vox'">VOX IoT</button>
+              <button class="tab" :class="{on: filter==='pasture'}" @click="filter='pasture'">数牧空间</button>
+            </div>
+            <div class="count">当前展示 {{ visible.length }} 个项目 · {{ count }} 个产品端 · {{ liveCount }} 个可访问</div>
+          </div>
+        </div>
+
+        <main class="wrap">
+          <section class="project" v-for="p in visible" :key="p.key" :style="{'--accent': p.accent, '--soft': p.soft}">
+            <div class="p-head">
+              <div class="p-mark" :style="{background:p.accent}">{{ p.mark }}</div>
+              <div style="flex:1;min-width:260px">
+                <div class="p-title">
+                  <h2>{{ p.name }}</h2>
+                  <code>{{ p.code }}</code>
+                </div>
+                <p class="p-desc">{{ p.positioning }}</p>
+                <div class="tags">
+                  <span class="tag" v-for="t in p.tags" :key="t">{{ t }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid">
+              <article v-for="e in p.ends" :key="e.title"
+                       class="card" :class="e.live ? 'live' : 'hold'"
+                       :tabindex="e.live ? 0 : -1"
+                       @click="openEnd(e)"
+                       @keydown="onCardKey($event, e)">
+                <div class="card-top">
+                  <span class="kind" :style="{background:p.soft, color:p.accent}">
+                    <iconify-icon :icon="icons[e.icon]" width="12" height="12" style="margin-right:4px"></iconify-icon>{{ e.kind }}
+                  </span>
+                  <span class="status"><i class="dot"></i>{{ e.live ? '可访问' : '未公开' }}</span>
+                </div>
+                <h3>{{ e.title }}</h3>
+                <p class="audience">{{ e.audience }}</p>
+                <ul class="feat">
+                  <li v-for="f in e.features" :key="f">{{ f }}</li>
+                </ul>
+                <span class="cta" v-if="e.live">
+                  打开访问
+                  <iconify-icon icon="lucide:arrow-up-right" width="14" height="14"></iconify-icon>
+                </span>
+                <span class="cta" v-else>暂无公开访问链接</span>
+                <div class="url">{{ e.urlText || e.note }}</div>
+              </article>
+            </div>
+          </section>
+        </main>
+
+        <section class="matrix">
+          <div class="wrap">
+            <h2>产品端总览</h2>
+            <p class="sub">按“项目 → 产品端 → 服务对象 → 访问状态”一览全部资产。</p>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th>项目</th><th>产品端</th><th>服务对象</th><th>核心场景</th><th>访问状态</th><th>链接</th></tr>
+                </thead>
+                <tbody>
+                  <tr v-for="r in rows" :key="r.project + r.end.title">
+                    <td><span style="display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px" :style="{background:r.accent}"></span>{{ r.project }}</td>
+                    <td style="font-weight:600">{{ r.end.title }}</td>
+                    <td>{{ r.end.audience.replace('面向','') }}</td>
+                    <td class="scene">{{ r.end.features[0] }}</td>
+                    <td><span class="pill" :class="r.end.live ? 'on' : 'off'">{{ r.end.live ? '可访问' : '暂未公开' }}</span></td>
+                    <td>
+                      <a v-if="r.end.live" :href="r.end.url" target="_blank" rel="noopener">打开</a>
+                      <span v-else style="color:var(--ink-3)">—</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <footer>
+          <div class="wrap">
+            <span>农业数字化综合平台 · 产品矩阵总览</span>
+            <span>共 2 个项目 / 6 个产品端 · 链接以线上实际部署为准</span>
+          </div>
+        </footer>
+      </div>
+    `
+  });
+
+  app.mount('#app');
+})();
+</script>
+</body>
+</html>
